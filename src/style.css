@@ -1,3 +1,34 @@
+/* ============================================================
+   style.css — all styles for the app
+   ------------------------------------------------------------
+   Mobile-first: one phone-width column, big tap targets,
+   white cards so text is readable on the template's background.
+
+   Sections:
+   1. Colours (variables)
+   2. Base (reset + page)
+   3. Layout
+   4. Reusable parts (cards, buttons)
+   5. Home screen
+   (Quiz, Grid, Result and Prize sections get added later)
+   ============================================================ */
+
+
+/* ---------- 1. Colours (variables) ----------
+   Change a colour here and it updates everywhere. */
+:root {
+  --text: #1d1d1f;
+  --text-soft: #555;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --white: #ffffff;
+  --primary: #3f6f6a;      /* dark teal, matches the background art */
+  --page-bg: #d4ef8a;      /* shown while bg.png loads */
+}
+
+
+/* ---------- 2. Base (reset + page) ---------- */
+
+/* Width/height include padding and border, so sizes are predictable */
 * {
   box-sizing: border-box;
 }
@@ -10,21 +41,95 @@ body {
 
 body {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  color: #1d1d1f;
-  background: #d4ef8a url('/bg.png') center / cover no-repeat fixed;
+  color: var(--text);
+  background: var(--page-bg) url('/bg.png') center / cover no-repeat fixed;
   min-height: 100vh;
 }
 
-.placeholder {
+
+/* ---------- 3. Layout ---------- */
+
+/* Every screen uses this: one column, phone width,
+   centred on bigger screens like laptops */
+.screen {
   max-width: 420px;
   margin: 0 auto;
-  padding: 32px 20px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   text-align: center;
 }
 
-.placeholder h1,
-.placeholder p {
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
+
+/* ---------- 4. Reusable parts ---------- */
+
+/* White see-through box for readable text */
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
   padding: 12px 16px;
+  margin: 0;
+}
+
+/* Main action button (e.g. Back, Next, Play again) */
+.btn {
+  min-height: 52px;            /* big enough for kids' fingers */
+  border: none;
+  border-radius: 14px;
+  background: var(--primary);
+  color: var(--white);
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+
+/* ---------- 5. Home screen ---------- */
+
+.title h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.title p {
+  margin: 4px 0 0;
+}
+
+/* Big game buttons: icon on the left, name + how-to-play on the right */
+.game-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 88px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 4px 0 var(--primary);   /* solid "3D" edge */
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Pressed: button moves down and the edge shrinks,
+   so players can feel the tap worked */
+.game-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--primary);
+}
+
+.game-btn .icon {
+  font-size: 2.4rem;
+}
+
+.game-btn strong {
+  display: block;
+  font-size: 1.25rem;
+}
+
+.game-btn small {
+  color: var(--text-soft);
 }
