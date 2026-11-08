@@ -8,32 +8,38 @@
 //        → render() → the Quiz screen is drawn
 // ============================================================
 
-import './style.css'
-import { state } from './state.js'
-import { renderHome } from './screens/home.js'
-import { renderQuiz } from './screens/quiz.js'
-import { renderGrid } from './screens/grid.js'
-import { renderResult } from './screens/result.js'
-import { renderPrize } from './screens/prize.js'
+import "./style.css";
+import { state } from "./state.js";
+import { renderHome } from "./screens/home.js";
+import { renderQuiz } from "./screens/quiz.js";
+import { renderGrid } from "./screens/grid.js";
+import { renderResult } from "./screens/result.js";
+import { renderPrize } from "./screens/prize.js";
+import { renderAdmin } from "./screens/admin.js";
 
 // The one element every screen draws into
-const app = document.querySelector('#app')
+const app = document.querySelector("#app");
 
 // Switch to another screen, then redraw
 // Every screen change goes through here, so screen switching only happens in one place
 function go(screen) {
-  state.screen = screen
-  render()
+  state.screen = screen;
+  render();
 }
 
 // Look at state.screen and draw the matching screen
 function render() {
-  if (state.screen === 'home') renderHome(app, go)
-  else if (state.screen === 'quiz') renderQuiz(app, go)
-  else if (state.screen === 'grid') renderGrid(app, go)
-  else if (state.screen === 'result') renderResult(app, go)
-  else if (state.screen === 'prize') renderPrize(app, go)
+  // Hidden staff page: add #admin to the URL
+  if (location.hash === "#admin") return renderAdmin(app);
+  if (state.screen === "home") renderHome(app, go);
+  else if (state.screen === "quiz") renderQuiz(app, go);
+  else if (state.screen === "grid") renderGrid(app, go);
+  else if (state.screen === "result") renderResult(app, go);
+  else if (state.screen === "prize") renderPrize(app, go);
 }
 
+// Re-render when switching between the game and #admin
+window.addEventListener("hashchange", render);
+
 // Draw the first screen (Home) when the page loads
-render()
+render();

@@ -7,6 +7,7 @@
 // ============================================================
 
 import { state } from "../state.js";
+import { startSession } from "../api.js";
 
 // app = the <div id="app"> we draw into
 // go  = function from main.js that switches screens (passed in so the two files don't import each other)
@@ -38,16 +39,19 @@ export function renderHome(app, go) {
                 </span>
             </button>
         </main>
-    `
+    `;
 
-    // The buttons only exist AFTER innerHTML runs, so we attach the click event listeners here
-    app.querySelectorAll('.game-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Read data-game('quiz' or 'points') from the button that was clicked
-            state.game = btn.dataset.game
+  // The buttons only exist AFTER innerHTML runs, so we attach the click event listeners here
+  app.querySelectorAll(".game-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Read data-game('quiz' or 'points') from the button that was clicked
+      state.game = btn.dataset.game;
 
-            // Go to the matching game screen
-            go(state.game === 'quiz' ? 'quiz' : 'grid')
-        })
-    })
+      // Record a new play (counts as a player)
+      state.sessionId = startSession(state.game);
+
+      // Go to the matching game screen
+      go(state.game === "quiz" ? "quiz" : "grid");
+    });
+  });
 }

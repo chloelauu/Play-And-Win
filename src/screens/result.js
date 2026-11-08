@@ -6,29 +6,34 @@
 // screen. Everyone else can play again.
 // ============================================================
 
-import { state, isWin, pointsToWin } from '../state.js'
+import { state, isWin, pointsToWin } from "../state.js";
+import { finishSession } from "../api.js";
 
 // Letters/numbers that are hard to mix up when read aloud
 // (no 0/O, 1/I/L), so staff can read the code easily
-const CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'
+const CODE_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 
 // Make a code like "PW-7K3Q"
 function makePrizeCode() {
-  let code = ''
+  let code = "";
   for (let i = 0; i < 4; i++) {
-    code += CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)]
+    code += CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)];
   }
-  return 'PW-' + code
+  return "PW-" + code;
 }
 
 export function renderResult(app, go) {
-  const won = isWin()
-  const gameName = state.game === 'quiz' ? 'Quiz' : 'Colour the Grid'
+  const won = isWin();
+
+  // Save the score and win/loss for the client's stats
+  finishSession(state.sessionId, state.score, state.maxScore, won);
+  
+  const gameName = state.game === "quiz" ? "Quiz" : "Colour the Grid";
 
   if (won) {
     // New code for each win; reset "collected" for this new prize
-    state.prizeCode = makePrizeCode()
-    state.redeemed = false
+    state.prizeCode = makePrizeCode();
+    state.redeemed = false;
 
     app.innerHTML = `
       <main class="screen">
@@ -39,8 +44,8 @@ export function renderResult(app, go) {
         </div>
         <button class="btn" id="prize">Show my prize screen</button>
       </main>
-    `
-    app.querySelector('#prize').addEventListener('click', () => go('prize'))
+    `;
+    app.querySelector("#prize").addEventListener("click", () => go("prize"));
   } else {
     app.innerHTML = `
       <main class="screen">
@@ -52,7 +57,7 @@ export function renderResult(app, go) {
         </div>
         <button class="btn" id="again">Play again</button>
       </main>
-    `
-    app.querySelector('#again').addEventListener('click', () => go('home'))
+    `;
+    app.querySelector("#again").addEventListener("click", () => go("home"));
   }
 }

@@ -13,6 +13,7 @@ export const state = {
   maxScore: 0,
   prizeCode: null, // set when the player wins
   redeemed: false, // set by staff once the prize is handed over
+  sessionId: null, // id of the current play in the data layer
 }
 
 // Client rule: a player wins with 80% or more of the max score

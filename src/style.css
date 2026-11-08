@@ -14,6 +14,7 @@
    7. Grid screen
    8. Result screen
    9. Prize screen
+   10. Admin screen
    (Quiz, Grid, Result and Prize sections get added later)
    ============================================================ */
 
@@ -316,4 +317,26 @@ body {
 .prize.collected {
   background: #e7f6e9;
   border-color: #2e8b57;
+}
+
+/* ---------- 10. Admin (staff stats) ---------- */
+
+/* Full-width table, labels on the left, numbers on the right */
+.stats {
+  width: 100%;
+  border-collapse: collapse;   /* removes gaps between cells */
+  text-align: left;
+}
+
+.stats th,
+.stats td {
+  padding: 10px 4px;
+  border-bottom: 1px solid #dfe7e5;
+}
+
+/* Numbers bold and right-aligned so they're easy to scan */
+.stats td {
+  text-align: right;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
