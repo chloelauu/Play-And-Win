@@ -53,10 +53,6 @@ You can use any framework or library, as long as `npm install` and `npm run dev`
 
 ## Your notes
 
-Replace this section before you submit.
-
-## Your notes
-
 - **What I prioritised, and why:**
   I first prioritised making sure both games worked fully, since they are what players see and are the core of the brief. Next was the prize screen, because it gives out real prizes, so staff must be able to tell a real, unused win from a fake or a screenshot. Data collection came last, as the brief marked it optional. I saved one row per play so the client's counts stay accurate, even when phones finish at the same time. The data is stored in localStorage, so the app runs with just `npm install` and `npm run dev`, with no keys to share. All data code is in `src/api.js`, so moving to a shared database later only changes that one file. Staff stats are at `http://localhost:5173/#admin`.
 
