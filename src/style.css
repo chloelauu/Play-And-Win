@@ -11,6 +11,9 @@
    4. Reusable parts (cards, buttons)
    5. Home screen
    6. Quiz screen
+   7. Grid screen
+   8. Result screen
+   9. Prize screen
    (Quiz, Grid, Result and Prize sections get added later)
    ============================================================ */
 
@@ -231,4 +234,86 @@ body {
 
 .hint {
   font-size: 0.95rem;
+}
+
+
+/* ---------- 8. Result screen ---------- */
+
+.result {
+  padding: 28px 16px;
+}
+
+.result h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.result p {
+  margin: 6px 0;
+  font-size: 1.15rem;
+}
+
+.result .big-emoji,
+.prize .big-emoji {
+  font-size: 3.5rem;
+  margin: 0;
+}
+
+/* ---------- 9. Prize screen ---------- */
+
+/* Bright, high-contrast so staff can read it at arm's length */
+.prize {
+  padding: 28px 16px;
+  background: #fff7d6;
+  border: 4px solid #f2b705;
+}
+
+.prize h1 {
+  margin: 4px 0;
+  font-size: 2.6rem;
+  letter-spacing: 0.08em;
+}
+
+.prize p {
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+
+/* The prize code: big, monospace so letters line up */
+.prize .code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.prize .clock {
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums; /* digits don't jump around */
+}
+
+/* Bouncing trophy: proves the screen is live, not a screenshot */
+.prize .badge {
+  font-size: 3.5rem;
+  margin: 0;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  50% { transform: translateY(-10px) rotate(-8deg); }
+}
+
+/* Staff button looks different from player buttons */
+.staff-btn {
+  background: #555;
+  font-size: 1rem;
+}
+
+.staff-btn.armed {
+  background: #c0392b;
+}
+
+.prize.collected {
+  background: #e7f6e9;
+  border-color: #2e8b57;
 }

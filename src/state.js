@@ -7,8 +7,23 @@
 // ============================================================
 
 export const state = {
-    screen: 'home', // which screen the game is showing
-    game: null, // 'quiz' or 'points'
-    score: 0,
-    maxScore: 0, // highest score player can get in respective games
+  screen: 'home',  // 'home' | 'quiz' | 'grid' | 'result' | 'prize'
+  game: null,      // 'quiz' | 'points'
+  score: 0,
+  maxScore: 0,
+  prizeCode: null, // set when the player wins
+  redeemed: false, // set by staff once the prize is handed over
+}
+
+// Client rule: a player wins with 80% or more of the max score
+// Defined once so both games always use the same rule
+export const WIN_RATIO = 0.8
+
+// Rounds up, so the quiz needs 4/5 and the grid needs 20/25
+export function pointsToWin(maxScore) {
+  return Math.ceil(maxScore * WIN_RATIO)
+}
+
+export function isWin() {
+  return state.score >= pointsToWin(state.maxScore)
 }
