@@ -185,3 +185,50 @@ body {
   background: var(--wrong);
   border-color: var(--wrong-edge);
 }
+
+/* ---------- 7. Grid game ---------- */
+
+/* Timer and score bar */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+/* 5 equal columns, square cells */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  padding: 8px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  touch-action: none;   /* stop the page scrolling while dragging */
+  user-select: none;    /* stop text highlighting while dragging */
+  opacity: 0.6;         /* faded until Start is pressed */
+}
+
+.grid.active {
+  opacity: 1;
+}
+
+.cell {
+  aspect-ratio: 1;      /* always a square */
+  border-radius: 10px;
+  background: var(--white);
+  box-shadow: inset 0 0 0 2px #dfe7e5;
+}
+
+/* Little "pop" when a cell gets coloured */
+.cell.filled {
+  box-shadow: none;
+  animation: pop 0.15s ease-out;
+}
+
+@keyframes pop {
+  50% { transform: scale(1.12); }
+}
+
+.hint {
+  font-size: 0.95rem;
+}

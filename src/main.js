@@ -7,29 +7,31 @@
 // Flow:  tap a button → go('quiz') → state.screen = 'quiz'
 //        → render() → the Quiz screen is drawn
 // ============================================================
- 
-import './style.css'
-import questions from './data/questions.json'
-import { state } from './state.js'
-import { renderHome } from './screens/home.js'
-import { renderQuiz } from './screens/quiz.js'
+
+import "./style.css";
+import questions from "./data/questions.json";
+import { state } from "./state.js";
+import { renderHome } from "./screens/home.js";
+import { renderQuiz } from "./screens/quiz.js";
+import { renderGrid } from "./screens/grid.js";
 
 // The one element every screen draws into
-const app = document.querySelector('#app')
+const app = document.querySelector("#app");
 
 // Switch  to another screen, then redraw
 // Every screen change goes through here, so screen switching only happens in one place
 function go(screen) {
-  state.screen = screen
-  render()
+  state.screen = screen;
+  render();
 }
 
 // Look at state.screen & draw the matching screen
 // New screens are added here as the app grows
 function render() {
-  if (state.screen === 'home') renderHome(app, go)
-  else if (state.screen === 'quiz') renderQuiz(app, go)
-  else renderComingSoon()
+  if (state.screen === "home") renderHome(app, go);
+  else if (state.screen === "quiz") renderQuiz(app, go);
+  else if (state.screen === "grid") renderGrid(app, go);
+  else renderComingSoon();
 }
 
 // TEMPORARY: placeholder until the quiz and grid are built.
@@ -40,9 +42,9 @@ function renderComingSoon() {
       <p class="card">${state.screen} screen coming soon<br>Score: ${state.score} / ${state.maxScore}</p>
       <button class="btn" id="back">Back</button>
     </main>
-  `
-  document.querySelector('#back').addEventListener('click', () => go('home'))
+  `;
+  document.querySelector("#back").addEventListener("click", () => go("home"));
 }
 
 // Draw the first screen (Home) when the page loads.
-render()
+render();
