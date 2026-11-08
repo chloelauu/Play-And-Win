@@ -12,6 +12,7 @@ import './style.css'
 import questions from './data/questions.json'
 import { state } from './state.js'
 import { renderHome } from './screens/home.js'
+import { renderQuiz } from './screens/quiz.js'
 
 // The one element every screen draws into
 const app = document.querySelector('#app')
@@ -27,6 +28,7 @@ function go(screen) {
 // New screens are added here as the app grows
 function render() {
   if (state.screen === 'home') renderHome(app, go)
+  else if (state.screen === 'quiz') renderQuiz(app, go)
   else renderComingSoon()
 }
 
@@ -35,7 +37,7 @@ function render() {
 function renderComingSoon() {
   app.innerHTML = `
     <main class="screen">
-      <p class="card">${state.screen} screen coming soon</p>
+      <p class="card">${state.screen} screen coming soon<br>Score: ${state.score} / ${state.maxScore}</p>
       <button class="btn" id="back">Back</button>
     </main>
   `

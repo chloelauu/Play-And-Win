@@ -10,6 +10,7 @@
    3. Layout
    4. Reusable parts (cards, buttons)
    5. Home screen
+   6. Quiz screen
    (Quiz, Grid, Result and Prize sections get added later)
    ============================================================ */
 
@@ -23,6 +24,10 @@
   --white: #ffffff;
   --primary: #3f6f6a;      /* dark teal, matches the background art */
   --page-bg: #d4ef8a;      /* shown while bg.png loads */
+  --correct: #b8f0b0;      /* quiz: right answer */
+  --correct-edge: #2e8b57;
+  --wrong: #ffc2c2;        /* quiz: wrong answer */
+  --wrong-edge: #c0392b;
 }
 
 
@@ -132,4 +137,51 @@ body {
 
 .game-btn small {
   color: var(--text-soft);
+}
+
+/* ---------- 6. Quiz screen ---------- */
+
+.progress {
+  font-weight: 600;
+}
+
+.question {
+  font-size: 1.4rem;
+  padding: 24px 16px;
+}
+
+/* Answers stacked, full width: easy to tap with a thumb */
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.answer-btn {
+  min-height: 64px;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 4px 0 var(--primary);
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Disabled while showing feedback, but keep full colour */
+.answer-btn:disabled {
+  cursor: default;
+  color: var(--text);
+}
+
+/* Right / wrong feedback */
+.answer-btn.correct {
+  background: var(--correct);
+  border-color: var(--correct-edge);
+}
+
+.answer-btn.wrong {
+  background: var(--wrong);
+  border-color: var(--wrong-edge);
 }
