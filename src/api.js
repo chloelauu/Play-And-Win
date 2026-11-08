@@ -22,7 +22,7 @@ function load() {
     );
   } catch {
     // Storage blocked or corrupted: start fresh instead of crashing the game
-    return { sessionStorage: [], prizeViews: [] };
+    return { sessions: [], prizeViews: [] };
   }
 }
 
