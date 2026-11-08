@@ -6,9 +6,12 @@
 //  - Live clock + moving badge: a screenshot can't tick or move.
 //  - "Mark as collected": staff tap it after giving the prize,
 //    so the same screen can't claim a second prize.
+// Every winner screen view is logged, so repeat opens show
+// up in the data.
 // ============================================================
 
 import { state } from '../state.js'
+import { logPrizeView, markRedeemed } from '../api.js'
 
 export function renderPrize(app, go) {
   const gameName = state.game === 'quiz' ? 'Quiz' : 'Colour the Grid'
@@ -31,6 +34,9 @@ export function renderPrize(app, go) {
   }
 
   // ---------- Winner screen ----------
+  // Count this view (client wants total prize screen views)
+  logPrizeView(state.sessionId)
+
   app.innerHTML = `
     <main class="screen">
       <div class="card prize">
@@ -66,6 +72,7 @@ export function renderPrize(app, go) {
     }
     clearInterval(clockId) // stop the clock before leaving this screen
     state.redeemed = true
+    markRedeemed(state.sessionId) // save it, so it shows in the staff stats
     renderPrize(app, go) // redraw as "Prize collected"
   })
 }
